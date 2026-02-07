@@ -1,0 +1,235 @@
+$paper-beige-darker: darken(#f0e6d2, 15%);
+$paper-beige-dark: darken(#f0e6d2, 10%);
+$paper-beige: #f0e6d2;
+$paper-beige-light: lighten(#f0e6d2, 10%);
+$paper-beige-lighter: lighten(#f0e6d2, 15%);
+$paper-white: #fffdf5;
+$shroom-red: #8b0000;
+$wood-brown: #2b1d0e;
+
+$bg-darker: $paper-beige-darker;
+$bg-dark: $paper-beige-dark;
+$bg: $paper-beige;
+$bg-light: $paper-beige-light;
+$bg-lighter: $paper-beige-lighter;
+$text: $wood-brown;
+$accent: $shroom-red;
+
+$line-i: 2px solid $text;
+$line-ii: 4px double $accent;
+$line-o: 2px dashed $text;
+
+$highlight-line: underline $accent double;
+
+$font-body: "DungGeunMo", "Courier New", monospace;
+
+/* */
+
+@font-face {
+    font-family: "DungGeunMo";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+::selection {
+    background: $accent;
+    color: $paper-white;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $bg;
+    color: $text;
+    font-family: $font-body;
+    margin: 0;
+    padding: 20px;
+    $grid: rgba($accent, 0.05);
+    background-image:
+        linear-gradient($grid 1px, transparent 1px),
+        linear-gradient(90deg, $grid 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    background-color: $paper-white;
+    max-width: 800px;
+    border: $line-ii;
+    position: relative;
+    margin: 20px auto;
+    padding: 25px;
+    /* box-shadow: 15px 15px 0px rgba($wood-brown, 0.3); */
+}
+
+header {
+    text-align: center;
+    border-bottom: $line-ii;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/*
+
+*/
+
+h1 {
+    color: $accent;
+    font-size: 2.4rem;
+    margin: 0;
+}
+
+h2 {
+    color: $text;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+p {
+    color: $text;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.code-block {
+    margin: 0;
+    padding: 20px;
+    color: $text;
+
+    font-family: $font-body;
+    font-size: 1rem;
+    margin: 0;
+    border: $line-o;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: pre;
+    scrollbar-width: thin;
+    scrollbar-color: $paper-beige-darker $paper-white;
+}
+
+.tok-h {
+    color: darken($paper-beige, 50%);
+}
+
+a {
+    color: $accent;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-decoration: none;
+}
+
+/*
+
+*/
+
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+}
+
+.tab-btn {
+    background: $bg-darker;
+
+    border: $line-i;
+    border-bottom: none;
+
+    font-family: inherit;
+    font-size: 1.1rem;
+    padding: 15px;
+    cursor: pointer;
+    flex-grow: 1;
+    position: relative;
+    top: 2px;
+    transition: background 0.2s;
+
+    &:hover {
+        background-color: $bg-dark;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+
+    &.is-active {
+        background: $accent;
+        color: white;
+        font-weight: bold;
+        top: 0;
+        z-index: 2;
+        border-color: $accent;
+    }
+
+    &:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+}
+
+.content-wrapper {
+    border: $line-i;
+    background-color: $bg;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+    min-height: 300px;
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+.card {
+    border: $line-i;
+    background: $bg-dark;
+    padding: 20px;
+    & + & {
+        margin-top: 20px;
+    }
+}
+
+.hr {
+    border: 0;
+    border-top: $line-i;
+    margin: 20px 0;
+    opacity: 0.8;
+}
+
+.photo {
+    float: left;
+    height: auto;
+    max-width: 100%;
+    background: $paper-white;
+    border: $line-ii;
+    margin: 20px;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 256px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}

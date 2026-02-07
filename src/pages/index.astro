@@ -1,17 +1,157 @@
 ---
-
+import DefaultLayout from "../layouts/default.astro";
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
-    </head>
-    <body>
-        <h1>Astro</h1>
-    </body>
-</html>
+<DefaultLayout title="Home">
+    <div class="container">
+        <header><h1>Hello!</h1></header>
+        <nav class="tabs">
+            <button class="tab-btn is-active" type="button" data-tab="main"
+                >About Me</button
+            >
+            <button class="tab-btn" type="button" data-tab="interests"
+                >Interests</button
+            >
+            <button class="tab-btn" type="button" data-tab="etc">Other</button>
+            <button class="tab-btn" type="button" data-tab="contact"
+                >Contact</button
+            >
+        </nav>
+
+        <div class="content-wrapper">
+            <div id="main" class="content-section active">
+                <h2>About Me</h2>
+                <p>
+                    Hello! I'm Sua Tso, a second-year student at Korea Digital
+                    Media High School majoring in web programming. I speak
+                    Korean and English. I'm interested in compiler theory,
+                    computer vision, category theory, and competitive
+                    programming. I'm currently the President of the <a
+                        href="https://github.com/monadimi">Monad Club</a
+                    >.
+                </p>
+            </div>
+            <div id="etc" class="content-section">
+                <img
+                    class="photo"
+                    src="src/images/me.webp"
+                    alt="프로필 사진"
+                    loading="lazy"
+                    decoding="async"
+                />
+                <pre
+                    class="code-block">
+zhaoxiuya :: <span class="tok-h">Person</span>
+zhaoxiuya = <span class="tok-h">Person</span>
+&#123; name        = <span class="tok-h">"Sua Tso"</span>
+, birthYear   = 2009
+, location    = <span class="tok-h">"South Korea"</span>
+, languages   = [<span class="tok-h">"Korean"</span>, <span class="tok-h">"English"</span>]
+, highSchool  = <span class="tok-h">"KDMHS"</span>
+, major       = <span class="tok-h">"Web Programming"</span>
+, email       = <span class="tok-h">"zhaoxiuya13@gmail.com"</span>
+, bio         = unlines
+    [ <span class="tok-h">"CS Student Interested in PLT and"</span>
+    , <span class="tok-h">"Category Theory. I enjoy making useless"</span>
+    , <span class="tok-h">"things and sleeping in the dorm"</span>
+    ]
+&#125;
+                </pre>
+            </div>
+            <div id="interests" class="content-section">
+                <h2>Programming Languages</h2>
+                <p>Haskell, C, C++, Fortran, Python, Zig</p>
+                <br />
+                <h2>Computer Science</h2>
+                <p>
+                    Competitive Programming, Compiler Theory, Computer Vision,
+                    Quantum Information Science
+                </p>
+                <br />
+                <h2>Mathematics</h2>
+                <p>Linear Algebra, Category Theory, Combinator Theory</p>
+                <br />
+                <h2>Other</h2>
+                <p>Conlanging, Sleeping, Physics, Electronics</p>
+            </div>
+            <div id="contact" class="content-section">
+                <h2>Contact</h2>
+                <p>
+                    Email: <a
+                        href="mailto:zhaoxiuya13@gmail.com"
+                        rel="noopener noreferrer">zhaoxiuya13@gmail.com</a
+                    >
+                </p>
+                <p>
+                    School Email: <a
+                        href="mailto:zhaoxiuya13@dimigo.hs.kr"
+                        rel="noopener noreferrer">zhaoxiuya13@dimigo.hs.kr</a
+                    >
+                </p>
+                <p>
+                    ORCID: <a
+                        href="https://orcid.org/0009-0004-1393-2031"
+                        target="_blank"
+                        rel="noopener noreferrer">0009-0004-1393-2031</a
+                    >
+                </p>
+                <p>
+                    LinkedIn: <a
+                        href="https://www.linkedin.com/in/zhaoxiuya/"
+                        target="_blank"
+                        rel="noopener noreferrer">Sua Tso</a
+                    >
+                </p>
+                <br />
+                <h2>Other</h2>
+                <p>
+                    Github: <a
+                        href="https://github.com/zhaoxiuya"
+                        target="_blank"
+                        rel="noopener noreferrer">zhaoxiuya</a
+                    >
+                </p>
+                <p>
+                    BOJ: <a
+                        href="https://www.acmicpc.net/user/zhaoxiuya"
+                        target="_blank"
+                        rel="noopener noreferrer">zhaoxiuya</a
+                    >
+                </p>
+                <p>
+                    Codeforces: <a
+                        href="https://codeforces.com/profile/zhaoxiuya"
+                        target="_blank"
+                        rel="noopener noreferrer">zhaoxiuya</a
+                    >
+                </p>
+                <p>
+                    Atcoder: <a
+                        href="https://atcoder.jp/users/zhaoxiuya"
+                        target="_blank"
+                        rel="noopener noreferrer">zhaoxiuya</a
+                    >
+                </p>
+            </div>
+        </div>
+
+        <script is:inline>
+            const buttons = document.querySelectorAll(".tab-btn");
+            const sections = document.querySelectorAll(".content-section");
+
+            function openTab(tabName) {
+                sections.forEach((sec) => sec.classList.remove("active"));
+                buttons.forEach((btn) => btn.classList.remove("is-active"));
+
+                document.getElementById(tabName)?.classList.add("active");
+                document
+                    .querySelector(`.tab-btn[data-tab="${tabName}"]`)
+                    ?.classList.add("is-active");
+            }
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", () => openTab(btn.dataset.tab));
+            });
+        </script>
+    </div>
+</DefaultLayout>
