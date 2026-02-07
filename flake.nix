@@ -15,13 +15,13 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in {
           default = pkgs.mkShell {
-            packages = [
+            packages = with pkgs; [
               git
               direnv
-              nodejs_20
+              bun
               pnpm
             ];
-          }
+          };
         }
       );
     };
