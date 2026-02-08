@@ -4,7 +4,9 @@ import DefaultLayout from "../layouts/default.astro";
 
 <DefaultLayout title="Home">
     <div class="container">
-        <header><h1>Hello!</h1></header>
+        <header>
+            <h1>Hello!</h1>Seconds since learning to code: <span id="dt"></span>
+        </header>
         <nav class="tabs">
             <button class="tab-btn is-active" type="button" data-tab="main"
                 >About Me</button
@@ -40,8 +42,7 @@ import DefaultLayout from "../layouts/default.astro";
                     decoding="async"
                 />
                 <pre
-                    class="code-block">
-zhaoxiuya :: <span class="tok-h">Person</span>
+                    class="code-block">zhaoxiuya :: <span class="tok-h">Person</span>
 zhaoxiuya = <span class="tok-h">Person</span>
 &#123; name        = <span class="tok-h">"Sua Tso"</span>
 , birthYear   = 2009
@@ -55,8 +56,7 @@ zhaoxiuya = <span class="tok-h">Person</span>
     , <span class="tok-h">"Category Theory. I enjoy making useless"</span>
     , <span class="tok-h">"things and sleeping in the dorm"</span>
     ]
-&#125;
-                </pre>
+&#125;</pre>
             </div>
             <div id="interests" class="content-section">
                 <h2>Programming Languages</h2>
@@ -133,25 +133,38 @@ zhaoxiuya = <span class="tok-h">Person</span>
                     >
                 </p>
             </div>
+
+            <script is:inline>
+                const buttons = document.querySelectorAll(".tab-btn");
+                const sections = document.querySelectorAll(".content-section");
+
+                function openTab(tabName) {
+                    sections.forEach((sec) => sec.classList.remove("active"));
+                    buttons.forEach((btn) => btn.classList.remove("is-active"));
+
+                    document.getElementById(tabName)?.classList.add("active");
+                    document
+                        .querySelector(`.tab-btn[data-tab="${tabName}"]`)
+                        ?.classList.add("is-active");
+                }
+
+                function updateDt() {
+                    const t0 = 1692617190.877;
+                    const t1 = Date.now() / 1000;
+                    const dt = Math.floor(t1 - t0);
+                    document.getElementById("dt").textContent =
+                        dt.toLocaleString();
+                }
+
+                updateDt();
+                setInterval(updateDt, 1000);
+
+                buttons.forEach((btn) => {
+                    btn.addEventListener("click", () =>
+                        openTab(btn.dataset.tab),
+                    );
+                });
+            </script>
         </div>
-
-        <script is:inline>
-            const buttons = document.querySelectorAll(".tab-btn");
-            const sections = document.querySelectorAll(".content-section");
-
-            function openTab(tabName) {
-                sections.forEach((sec) => sec.classList.remove("active"));
-                buttons.forEach((btn) => btn.classList.remove("is-active"));
-
-                document.getElementById(tabName)?.classList.add("active");
-                document
-                    .querySelector(`.tab-btn[data-tab="${tabName}"]`)
-                    ?.classList.add("is-active");
-            }
-
-            buttons.forEach((btn) => {
-                btn.addEventListener("click", () => openTab(btn.dataset.tab));
-            });
-        </script>
     </div>
 </DefaultLayout>
